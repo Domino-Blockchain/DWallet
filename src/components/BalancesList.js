@@ -617,7 +617,7 @@ function BalanceListItemDetails({
 
   let { mint, tokenName, tokenSymbol, owner, amount } = balanceInfo;
 
-  // Only show the export UI for the native SOL coin.
+  // Only show the export UI for the native DOMI coin.
   const exportNeedsDisplay =
     mint === null && tokenName === 'SOL' && tokenSymbol === 'SOL';
 

@@ -14,7 +14,7 @@ import BN from 'bn.js';
 import { useAsyncData } from '../fetch-loop';
 import tuple from 'immutable-tuple';
 
-// Address of the SOL TLD
+// Address of the DOMI TLD
 export const SOL_TLD_AUTHORITY = new PublicKey(
   '58PwtjSDuFHuUkYjH9BYnnQKHfwo9reZhC2zMJv9JPkx',
 );
