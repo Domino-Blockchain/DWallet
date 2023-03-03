@@ -597,7 +597,7 @@ function BalanceListItemDetails({
       'POST',
       'swap_to',
       {
-        blockchain: 'sol',
+        blockchain: 'domi',
         coin: balanceInfo.mint?.toBase58(),
         address: publicKey.toBase58(),
       },
@@ -619,7 +619,7 @@ function BalanceListItemDetails({
 
   // Only show the export UI for the native DOMI coin.
   const exportNeedsDisplay =
-    mint === null && tokenName === 'SOL' && tokenSymbol === 'SOL';
+    mint === null && tokenName === 'DOMI' && tokenSymbol === 'DOMI';
 
   const market = tokenSymbol
     ? serumMarkets[tokenSymbol.toUpperCase()]

@@ -92,11 +92,6 @@
     "singleQuote": true,
     "trailingComma": "all"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "git-format-staged -f 'prettier --stdin-filepath \"{}\"' src/*.js"
-    }
-  },
   "devDependencies": {
     "@types/react-copy-to-clipboard": "^5.0.1",
     "cordova-android": "^10.1.2",

@@ -61,7 +61,7 @@ export default function DepositDialog({
     let firstTab = `SPL ${tokenSymbol ?? swapInfo.coin.ticker}`;
     let secondTab = swapInfo.coin.ticker;
     if (!mint) {
-      firstTab = 'SOL';
+      firstTab = 'DOMI';
     } else {
       if (
         localStorage.getItem('sollet-private') ||
@@ -114,7 +114,7 @@ export default function DepositDialog({
           textColor="primary"
           indicatorColor="primary"
         >
-          <Tab label={mint ? 'SPL' : 'SOL'} />
+          <Tab label={mint ? 'SPL' : 'DOMI'} />
           <Tab label="Wormhole" />
         </Tabs>
       ) : (

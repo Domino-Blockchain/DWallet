@@ -95,7 +95,7 @@ export default function NavigationFrame({ children }) {
         )}
         <Toolbar>
           <Typography variant="h6" className={classes.title} component="h1">
-            {isExtensionWidth ? 'Sollet' : 'Solana SPL Token Wallet'}
+            {isExtensionWidth ? 'Sollet' : 'Domichain SPL Token Wallet'}
           </Typography>
           <NavigationButtons />
         </Toolbar>

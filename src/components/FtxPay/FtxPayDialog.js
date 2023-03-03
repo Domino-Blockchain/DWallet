@@ -41,7 +41,7 @@ export default function FtxPayDialog({ open, onClose }) {
   const classes = useStyles();
   const popularTokens = usePopularTokens();
   const selectedAccount = accounts.find((a) => a.isSelected);
-  const [coin, setCoin] = useState('SOL');
+  const [coin, setCoin] = useState('DOMI');
   const address = selectedAccount?.address?.toBase58();
   const urlSuffix = useSolanaExplorerUrlSuffix();
   const isExtensionWidth = useIsExtensionWidth();
@@ -77,16 +77,16 @@ export default function FtxPayDialog({ open, onClose }) {
         <div className={classes.container}>
           <FormControl variant="outlined" className={classes.selector}>
             <Select value={coin} onChange={(e) => setCoin(e.target.value)}>
-              <MenuItem value={'SOL'}>
+              <MenuItem value={'DOMI'}>
                 <div className={classes.menuItem}>
                   <TokenIcon
                     url={null}
                     mint={null}
-                    tokenName={'SOL'}
+                    tokenName={'DOMI'}
                     size={30}
                     className={classes.tokenIcon}
                   />
-                  <div>{isExtensionWidth ? 'SOL' : 'Solana SOL'}</div>
+                  <div>{isExtensionWidth ? 'DOMI' : 'Domichain DOMI'}</div>
                 </div>
               </MenuItem>
               {popularTokens
