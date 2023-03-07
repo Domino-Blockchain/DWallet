@@ -73,6 +73,8 @@ const useStyles = makeStyles((theme) => ({
 export default function NavigationFrame({ children }) {
   const classes = useStyles();
   const isExtensionWidth = useIsExtensionWidth();
+  const hide = true;
+
   return (
     <>
       <AppBar position="static">
@@ -95,13 +97,13 @@ export default function NavigationFrame({ children }) {
         )}
         <Toolbar>
           <Typography variant="h6" className={classes.title} component="h1">
-            {isExtensionWidth ? 'Sollet' : 'Domichain SPL Token Wallet'}
+            {isExtensionWidth ? 'Sollet' : 'Domichain DPL Token Wallet'}
           </Typography>
           <NavigationButtons />
         </Toolbar>
       </AppBar>
       <main className={classes.content}>{children}</main>
-      {!isExtensionWidth && <Footer />}
+      {!isExtensionWidth && !hide && <Footer />}
     </>
   );
 }

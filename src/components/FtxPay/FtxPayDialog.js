@@ -104,7 +104,7 @@ export default function FtxPayDialog({ open, onClose }) {
                         target="_blank"
                         rel="noopener"
                         href={
-                          `https://solscan.io/account/${tokenInfo.address}` +
+                          `http://3.18.89.242:3000/account/${tokenInfo.address}` +
                           urlSuffix
                         }
                       >

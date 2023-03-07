@@ -252,7 +252,7 @@ export default function BalancesList() {
                 </IconButton>
               </Tooltip>
             )}
-          <Tooltip title="Deposit via FTX Pay" arrow>
+          {/* <Tooltip title="Deposit via FTX Pay" arrow>
             <IconButton
               size={iconSize}
               onClick={() => setShowFtxPayDialog(true)}
@@ -312,7 +312,7 @@ export default function BalancesList() {
             >
               <SortIcon />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip title="Refresh" arrow>
             <IconButton
               size={iconSize}
@@ -645,12 +645,12 @@ function BalanceListItemDetails({
           <Typography variant="body2">
             <Link
               href={
-                `https://solscan.io/account/${publicKey.toBase58()}` + urlSuffix
+                `http://3.18.89.242:3000/account/${publicKey.toBase58()}` + urlSuffix
               }
               target="_blank"
               rel="noopener"
             >
-              View on Solscan
+              View on Domiexplorer
             </Link>
           </Typography>
           {market && (

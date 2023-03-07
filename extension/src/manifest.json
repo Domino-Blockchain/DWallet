@@ -1,6 +1,6 @@
 {
   "name": "DWallet",
-  "description": "Domichain SPL Token Wallet",
+  "description": "Domichain DPL Token Wallet",
   "version": "0.0.1",
   "browser_action": {
     "default_popup": "index.html",

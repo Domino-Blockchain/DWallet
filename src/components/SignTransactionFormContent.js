@@ -68,7 +68,7 @@ function isSafeInstruction(publicKeys, owner, txInstructions) {
             unsafe = true;
           }
         } else if (instruction.type === 'initializeAccount') {
-          // New SPL token accounts are only considered safe if they are owned by this wallet and newly created
+          // New DPL token accounts are only considered safe if they are owned by this wallet and newly created
           let { ownerPubkey, accountPubkey } = instruction.data;
           if (
             owner &&
@@ -179,7 +179,7 @@ export default function SignTransactionFormContent({
   const onOpenAddress = (address) => {
     address &&
       window.open(
-        'https://solscan.io/account/' + address + explorerUrlSuffix,
+        'http://3.18.89.242:3000/account/' + address + explorerUrlSuffix,
         '_blank',
       );
   };

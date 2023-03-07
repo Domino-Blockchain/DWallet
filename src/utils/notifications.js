@@ -59,9 +59,9 @@ function ViewTransactionOnExplorerButton({ signature }) {
       component="a"
       target="_blank"
       rel="noopener"
-      href={`https://solscan.io/tx/${signature}` + urlSuffix}
+      href={`http://3.18.89.242:3000/tx/${signature}` + urlSuffix}
     >
-      View on Solscan
+      View on Domiexplorer
     </Button>
   );
 }

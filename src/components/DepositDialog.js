@@ -58,7 +58,7 @@ export default function DepositDialog({
 
   let tabs = null;
   if (swapInfo) {
-    let firstTab = `SPL ${tokenSymbol ?? swapInfo.coin.ticker}`;
+    let firstTab = `DOMI ${tokenSymbol ?? swapInfo.coin.ticker}`;
     let secondTab = swapInfo.coin.ticker;
     if (!mint) {
       firstTab = 'DOMI';
@@ -114,7 +114,7 @@ export default function DepositDialog({
           textColor="primary"
           indicatorColor="primary"
         >
-          <Tab label={mint ? 'SPL' : 'DOMI'} />
+          <Tab label={mint ? 'DOMI' : 'DOMI'} />
           <Tab label="Wormhole" />
         </Tabs>
       ) : (
@@ -149,12 +149,12 @@ export default function DepositDialog({
             <DialogContentText variant="body2">
               <Link
                 href={
-                  `https://solscan.io/account/${depositAddressStr}` + urlSuffix
+                  `http://3.18.89.242:3000/account/${depositAddressStr}` + urlSuffix
                 }
                 target="_blank"
                 rel="noopener"
               >
-                View on Solscan
+                View on Domiexplorer
               </Link>
             </DialogContentText>
           </>
@@ -228,7 +228,7 @@ function SolletSwapDepositAddress({ balanceInfo, swapInfo, ethAccount }) {
     return (
       <>
         <DialogContentText>
-          Native BTC can be converted to SPL {tokenName} by sending it to the
+          Native BTC can be converted to DOMI {tokenName} by sending it to the
           following address:
         </DialogContentText>
         <CopyableDisplay
@@ -246,7 +246,7 @@ function SolletSwapDepositAddress({ balanceInfo, swapInfo, ethAccount }) {
       <>
         <DialogContentText>
           {coin.erc20Contract ? 'ERC20' : 'Native'} {coin.ticker} can be
-          converted to {mint ? 'SPL' : 'native'} {tokenName} via MetaMask. To
+          converted to {mint ? 'DOMI' : 'native'} {tokenName} via MetaMask. To
           convert, you must already have DOMI in your wallet.
         </DialogContentText>
         <DialogContentText>

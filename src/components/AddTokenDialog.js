@@ -243,7 +243,7 @@ function TokenListItem({ tokenInfo, onSubmit, disabled, existingAccount }) {
                 target="_blank"
                 rel="noopener"
                 href={
-                  `https://solscan.io/account/${tokenInfo.address}` +
+                  `http://3.18.89.242:3000/account/${tokenInfo.address}` +
                   urlSuffix
                 }
               >

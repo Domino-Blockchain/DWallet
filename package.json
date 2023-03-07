@@ -1,13 +1,12 @@
 {
-  "name": "io.cordova.hellocordova",
+  "name": "io.domichain.dwallet",
   "homepage": "./",
-  "displayName": "HelloCordova",
+  "displayName": "Domichain Wallet",
   "version": "0.1.0",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "description": "Domichain's official wallet.",
   "keywords": [
     "ecosystem:cordova"
   ],
-  "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "dependencies": {
     "@bonfida/spl-name-service": "^0.1.24",
