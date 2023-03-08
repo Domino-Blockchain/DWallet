@@ -107,7 +107,7 @@ function SeedWordsForm({ mnemonicAndSeed, goForward }) {
     const url = window.URL.createObjectURL(new Blob([mnemonic]));
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', 'sollet.bak');
+    link.setAttribute('download', 'domichain_priv_key.bak');
     document.body.appendChild(link);
     link.click();
   }
@@ -145,12 +145,13 @@ function SeedWordsForm({ mnemonicAndSeed, goForward }) {
             storage is cleared or your device is damaged or lost.
           </Typography>
           <Typography paragraph>
-            By default, sollet will use <code>m/44'/501'/0'/0'</code> as the
+            By default, domichain wallet will use <code>m/44'/501'/0'/0'</code> as the
             derivation path for the main wallet. To use an alternative path, try
             restoring an existing wallet.
           </Typography>
           <Typography paragraph>
-            <b>Note:</b> For certain users, Sollet may <b>NOT</b> be secure. See{' '}
+            <b>Note:</b> For certain users, domichain wallet may <b>NOT</b> be secure. See{' '}
+            {/* fixme */}
             <a
               style={{ color: 'inherit'}}
               href="https://medium.com/metamask/security-notice-extension-disk-encryption-issue-d437d4250863"

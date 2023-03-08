@@ -97,7 +97,7 @@ export default function NavigationFrame({ children }) {
         )}
         <Toolbar>
           <Typography variant="h6" className={classes.title} component="h1">
-            {isExtensionWidth ? 'Sollet' : 'Domichain DPL Token Wallet'}
+            {isExtensionWidth ? 'DWallet' : 'Domichain Wallet'}
           </Typography>
           <NavigationButtons />
         </Toolbar>
@@ -136,7 +136,7 @@ function NavigationButtons() {
 
 function ExpandButton() {
   const onClick = () => {
-    window.open(chrome.extension.getURL('index.html'), '_blank');
+    window.open(chrome.runtime.getURL('index.html'), '_blank');
   };
 
   return (

@@ -2,7 +2,7 @@
   "name": "io.domichain.dwallet",
   "homepage": "./",
   "displayName": "Domichain Wallet",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Domichain's official wallet.",
   "keywords": [
     "ecosystem:cordova"
