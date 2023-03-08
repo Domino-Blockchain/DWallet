@@ -90,7 +90,7 @@ function PageContents() {
   if (!wallet) {
     return (
       <>
-        {!ignoreSuggestion && (
+        {!ignoreSuggestion && false && (
           <WalletSuggestionDialog
             open={showWalletSuggestion}
             onClose={() => setShowWalletSuggestion(false)}

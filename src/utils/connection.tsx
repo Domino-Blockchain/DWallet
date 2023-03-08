@@ -16,10 +16,10 @@ const ConnectionContext = React.createContext<{
   connection: Connection;
 } | null>(null);
 
-export const MAINNET_URL = 'http://3.18.89.242:8899';
+export const MAINNET_URL = 'https://mainnet.domichain.io';
 // No backup url for now. Leave the variable to not break wallets that
 // have saved the url in their local storage, previously.
-export const MAINNET_BACKUP_URL = 'http://3.18.89.242:8899';
+export const MAINNET_BACKUP_URL = 'https://mainnet.domichain.io';
 export function ConnectionProvider({ children }) {
   const [endpoint, setEndpoint] = useLocalStorageState(
     'connectionEndpoint',
@@ -67,9 +67,9 @@ export function useSolanaExplorerUrlSuffix() {
     throw new Error('Missing connection context');
   }
   const endpoint = context.endpoint;
-  if (endpoint === clusterApiUrl('devnet')) {
+  if (endpoint === 'https://api.devnet.domichain.io') {
     return '?cluster=devnet';
-  } else if (endpoint === clusterApiUrl('testnet')) {
+  } else if (endpoint === 'https://api.testnet.domichain.io') {
     return '?cluster=testnet';
   }
   return '';

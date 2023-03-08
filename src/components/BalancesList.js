@@ -234,9 +234,9 @@ export default function BalancesList() {
                       selectedAccount &&
                       shortenAddress(selectedAccount.address.toBase58())
                     })`}{' '}
-                {allTokensLoaded && (
-                  <>({numberFormat.format(totalUsdValue.toFixed(2))})</>
-                )}
+                {/* {allTokensLoaded && ( */}
+                  {/* <>({numberFormat.format(totalUsdValue.toFixed(2))})</> */}
+                {/* )} */}
               </Typography>
             </Tooltip>
           </CopyToClipboard>
