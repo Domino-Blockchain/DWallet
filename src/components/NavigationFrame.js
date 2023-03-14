@@ -23,7 +23,7 @@ import UsbIcon from '@material-ui/icons/Usb';
 import Divider from '@material-ui/core/Divider';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import SolanaIcon from './SolanaIcon';
+import DomichainIcon from './DomichainIcon';
 import CodeIcon from '@material-ui/icons/Code';
 import Tooltip from '@material-ui/core/Tooltip';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
@@ -97,7 +97,7 @@ export default function NavigationFrame({ children }) {
         )}
         <Toolbar>
           <Typography variant="h6" className={classes.title} component="h1">
-            {isExtensionWidth ? 'DWallet' : 'Domichain Wallet'}
+            {isExtensionWidth ? 'Domilet' : 'Domichain DPL Token Wallet'}
           </Typography>
           <NavigationButtons />
         </Toolbar>
@@ -236,7 +236,7 @@ function NetworkSelector() {
       <Hidden smUp>
         <Tooltip title="Select Network" arrow>
           <IconButton color="inherit" onClick={(e) => setAnchorEl(e.target)}>
-            <SolanaIcon />
+            <DomichainIcon />
           </IconButton>
         </Tooltip>
       </Hidden>

@@ -114,7 +114,7 @@ export default function DepositDialog({
           textColor="primary"
           indicatorColor="primary"
         >
-          <Tab label={mint ? 'DPL' : 'DPL'} />
+          <Tab label={mint ? 'DPL' : 'DOMI'} />
           <Tab label="Wormhole" />
         </Tabs>
       ) : (
@@ -172,7 +172,7 @@ export default function DepositDialog({
             to bridge your assets.
           </DialogContentText>
         ) : (
-          <DomichainSwapDepositAddress
+          <DomiletSwapDepositAddress
             balanceInfo={balanceInfo}
             swapInfo={swapInfo}
             ethAccount={ethAccount}
@@ -186,7 +186,7 @@ export default function DepositDialog({
   );
 }
 
-function DomichainSwapDepositAddress({ balanceInfo, swapInfo, ethAccount }) {
+function DomiletSwapDepositAddress({ balanceInfo, swapInfo, ethAccount }) {
   const [ethBalance] = useAsyncData(
     () => getErc20Balance(ethAccount),
     'ethBalance',

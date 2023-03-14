@@ -41,7 +41,7 @@ export default function FtxPayDialog({ open, onClose }) {
   const classes = useStyles();
   const popularTokens = usePopularTokens();
   const selectedAccount = accounts.find((a) => a.isSelected);
-  const [coin, setCoin] = useState('dpl');
+  const [coin, setCoin] = useState('DOMI');
   const address = selectedAccount?.address?.toBase58();
   const urlSuffix = useDomichainExplorerUrlSuffix();
   const isExtensionWidth = useIsExtensionWidth();
@@ -69,7 +69,7 @@ export default function FtxPayDialog({ open, onClose }) {
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Send funds to your Domichain wallet from an FTX account, where you can add funds using crypto on multiple blockchains, credit cards, and more.
+          Send funds to your Domilet wallet from an FTX account, where you can add funds using crypto on multiple blockchains, credit cards, and more.
         </DialogContentText>
         <DialogContentText>
           If you don't have an FTX account, it may take a few moments to get up.

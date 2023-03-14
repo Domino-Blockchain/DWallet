@@ -89,7 +89,7 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
 
     if (mint?.equals(WUSDC_MINT)) {
       return [
-        <Tab label="DOMI WUSDC" key="dpl" value="dpl" />,
+        <Tab label="DPL WUSDC" key="dpl" value="dpl" />,
         <Tab label={`Wormhole`} key="wormhole" value="wormhole" />,
         <Tab label="DPL USDC" key="wusdcToDplUsdc" value="wusdcToDplUsdc" />,
         <Tab label="ERC20 USDC" key="swap" value="swap" />,
@@ -106,9 +106,9 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
       mint?.equals(USDC_MINT)
     ) {
       return [
-        <Tab label="DOMI USDC" key="dpl" value="dpl" />,
+        <Tab label="DPL USDC" key="dpl" value="dpl" />,
         <Tab label={`Wormhole`} key="wormhole" value="wormhole" />,
-        <Tab label="DOMI WUSDC" key="usdcToDplWUsdc" value="usdcToDplWUsdc" />,
+        <Tab label="DPL WUSDC" key="usdcToDplWUsdc" value="usdcToDplWUsdc" />,
         <Tab label="ERC20 USDC" key="swap" value="swap" />,
       ];
     } else {
@@ -447,10 +447,6 @@ function SendSwapDialog({
       ? 'eth'
       : swapCoinInfo.blockchain;
 
-  console.log("names", wusdcToDplUsdc, wusdtToDplUsdt, usdcToDplWUsdc)
-  console.log("swapCoinInfo.blockchain", swapCoinInfo.blockchain)
-  console.log("blockchain", blockchain)
-      
   const needMetamask = blockchain === 'eth';
 
   const [ethBalance] = useAsyncData(
