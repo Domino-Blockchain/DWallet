@@ -59,7 +59,7 @@ const DISABLED_ERC20_MINTS = new Set([
 
 export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
   const isProdNetwork = useIsProdNetwork();
-  const [tab, setTab] = useState('spl'); //fixme
+  const [tab, setTab] = useState('dpl');
   const onSubmitRef = useRef();
 
   let [swapCoinInfo] = useSwapApiGet(
@@ -88,7 +88,7 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
       ];
 
     if (mint?.equals(WUSDC_MINT)) {
-      return [ // which to delete / leave
+      return [
         <Tab label="DOMI WUSDC" key="domi" value="domi" />,
         <Tab label={`Wormhole`} key="wormhole" value="wormhole" />,
         <Tab label="DOMI USDC" key="wusdcToDomiUsdc" value="wusdcToDomiUsdc" />,
@@ -106,7 +106,7 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
       mint?.equals(USDC_MINT)
     ) {
       return [
-        <Tab label="DOMI USDC" key="spl" value="spl" />,
+        <Tab label="DOMI USDC" key="dpl" value="dpl" />,
         <Tab label={`Wormhole`} key="wormhole" value="wormhole" />,
         <Tab label="DOMI WUSDC" key="usdcToDomiWUsdc" value="usdcToDomiWUsdc" />,
         <Tab label="ERC20 USDC" key="swap" value="swap" />,
@@ -172,13 +172,13 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
             textColor="primary"
             indicatorColor="primary"
           >
-            <Tab label="SPL" key="spl" value="spl" /> 
+            <Tab label="DOMI" key="domi" value="domi" /> 
             {/* fixme */}
             <Tab label={`Wormhole`} key="wormhole" value="wormhole" />
           </Tabs>
         )}
-        {tab === 'spl' ? (
-          <SendSplDialog
+        {tab === 'dpl' ? (
+          <SendDomiDialog
             onClose={onClose}
             publicKey={publicKey}
             balanceInfo={balanceInfo}
@@ -249,7 +249,7 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
   );
 }
 
-function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
+function SendDomiDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
   const defaultAddressHelperText =
     !balanceInfo.mint || balanceInfo.mint.equals(WRAPPED_SOL_MINT)
       ? 'Enter Domichain Address'
@@ -442,7 +442,7 @@ function SendSwapDialog({
 
   const { tokenName, decimals, mint } = balanceInfo;
   const blockchain =
-    wusdcToSplUsdc || wusdtToSplUsdt || usdcToSplWUsdc
+    wusdcToDomiUsdc || wusdtToDomiUsdt || usdcToDomiWUsdc
       ? 'domi'
       : swapCoinInfo.blockchain === 'domi'
       ? 'eth'
@@ -512,7 +512,7 @@ function SendSwapDialog({
       size: amount / 10 ** decimals,
     };
     if (blockchain === 'sol') {
-      params.coin = swapCoinInfo.splMint;
+      params.coin = swapCoinInfo.domiMint;
     } else if (blockchain === 'eth') {
       params.coin = swapCoinInfo.erc20Contract;
     }
@@ -592,7 +592,7 @@ function SendSwapDialog({
           DOMI {tokenName} can be converted to{' '}
           {blockchain === 'eth' && swapCoinInfo.erc20Contract
             ? 'ERC20'
-            : blockchain === 'sol' && swapCoinInfo.splMint
+            : blockchain === 'sol' && swapCoinInfo.domiMint
             ? 'DOMI'
             : 'native'}{' '}
           {swapCoinInfo.ticker}

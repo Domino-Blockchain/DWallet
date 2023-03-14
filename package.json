@@ -1,5 +1,5 @@
 {
-  "name": "io.domichain.dwallet",
+  "name": "domichain_wallet",
   "homepage": "./",
   "displayName": "Domichain Wallet",
   "version": "0.0.1",

@@ -1,5 +1,5 @@
 {
-  "name": "DWallet",
+  "name": "Domichain Wallet",
   "description": "Domichain Wallet",
   "version": "0.0.1",
   "browser_action": {

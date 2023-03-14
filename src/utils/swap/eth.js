@@ -235,11 +235,11 @@ export function ConnectToMetamaskButton() {
         color="primary"
         variant="outlined"
         component="a"
-        href={isExtension == "fixme" ? 'https://sollet.io' : 'https://metamask.io/'}
+        href={isExtension ? 'https://domilet.io' : 'https://metamask.io/'}
         target="_blank"
         rel="noopener"
       >
-        {isExtension == "fixme" ? 'Open sollet.io' : 'Connect to MetaMask'}
+        {isExtension ? 'Open domilet.io' : 'Connect to MetaMask'}
       </Button>
     );
   }

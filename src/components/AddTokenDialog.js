@@ -90,7 +90,7 @@ export default function AddTokenDialog({ open, onClose }) {
   }) {
     if (erc20Address) {
       let tokenInfo = await swapApiRequest('POST', `coins/eth/${erc20Address}`);
-      mintAddress = tokenInfo.splMint;
+      mintAddress = tokenInfo.domiMint;
       tokenName = tokenInfo.name;
       tokenSymbol = tokenInfo.ticker;
       if (tokenInfo.blockchain !== 'sol') {
