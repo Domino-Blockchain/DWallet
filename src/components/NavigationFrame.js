@@ -23,7 +23,7 @@ import UsbIcon from '@material-ui/icons/Usb';
 import Divider from '@material-ui/core/Divider';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import SolanaIcon from './SolanaIcon';
+import DomichainIcon from './DomichainIcon';
 import CodeIcon from '@material-ui/icons/Code';
 import Tooltip from '@material-ui/core/Tooltip';
 import ImportExportIcon from '@material-ui/icons/ImportExport';
@@ -73,6 +73,8 @@ const useStyles = makeStyles((theme) => ({
 export default function NavigationFrame({ children }) {
   const classes = useStyles();
   const isExtensionWidth = useIsExtensionWidth();
+  const hide = true;
+
   return (
     <>
       <AppBar position="static">
@@ -87,21 +89,21 @@ export default function NavigationFrame({ children }) {
               fontSize: '14px',
             }}
           >
-            <Typography>
-              Beware of sites attempting to impersonate sollet.io or other DeFi
+            {/* <Typography>
+              Beware of sites attempting to impersonate domilet.io or other DeFi
               services.
-            </Typography>
+            </Typography> */}
           </div>
         )}
         <Toolbar>
           <Typography variant="h6" className={classes.title} component="h1">
-            {isExtensionWidth ? 'Sollet' : 'Solana SPL Token Wallet'}
+            {isExtensionWidth ? 'Domilet' : 'Domichain DPL Token Wallet'}
           </Typography>
           <NavigationButtons />
         </Toolbar>
       </AppBar>
       <main className={classes.content}>{children}</main>
-      {!isExtensionWidth && <Footer />}
+      {!isExtensionWidth && !hide && <Footer />}
     </>
   );
 }
@@ -117,24 +119,24 @@ function NavigationButtons() {
   let elements = [];
   if (page === 'wallet') {
     elements = [
-      isExtension && <ConnectionsButton />,
-      <WalletSelector />,
-      <NetworkSelector />,
-    ];
+    isExtension && <ConnectionsButton />,
+    <WalletSelector />,
+    <NetworkSelector />,
+ ];
   } else if (page === 'connections') {
     elements = [<WalletButton />];
   }
 
-  if (isExtension && isExtensionWidth) {
-    elements.push(<ExpandButton />);
-  }
+  // if (isExtension && isExtensionWidth) {
+  elements.push(<ExpandButton />);
+  // }
 
   return elements;
 }
 
 function ExpandButton() {
   const onClick = () => {
-    window.open(chrome.extension.getURL('index.html'), '_blank');
+    window.open(chrome.runtime.getURL('index.html'), '_blank');
   };
 
   return (
@@ -234,7 +236,7 @@ function NetworkSelector() {
       <Hidden smUp>
         <Tooltip title="Select Network" arrow>
           <IconButton color="inherit" onClick={(e) => setAnchorEl(e.target)}>
-            <SolanaIcon />
+            <DomichainIcon />
           </IconButton>
         </Tooltip>
       </Hidden>

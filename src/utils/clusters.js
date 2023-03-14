@@ -16,13 +16,13 @@ export const CLUSTERS = [
   },
   {
     name: 'devnet',
-    apiUrl: clusterApiUrl('devnet'),
+    apiUrl: 'https://api.devnet.domichain.io',
     label: 'Devnet',
     clusterSlug: 'devnet',
   },
   {
     name: 'testnet',
-    apiUrl: clusterApiUrl('testnet'),
+    apiUrl: 'https://api.testnet.domichain.io',
     label: 'Testnet',
     clusterSlug: 'testnet',
   },

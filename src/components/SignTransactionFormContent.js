@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import { decodeMessage } from '../utils/transactions';
-import { useConnection, useSolanaExplorerUrlSuffix } from '../utils/connection';
+import { useConnection, useDomichainExplorerUrlSuffix } from '../utils/connection';
 import { useWallet, useWalletPublicKeys } from '../utils/wallet';
 import NewOrder from './instructions/NewOrder';
 import UnknownInstruction from './instructions/UnknownInstruction';
@@ -68,7 +68,7 @@ function isSafeInstruction(publicKeys, owner, txInstructions) {
             unsafe = true;
           }
         } else if (instruction.type === 'initializeAccount') {
-          // New SPL token accounts are only considered safe if they are owned by this wallet and newly created
+          // New DPL token accounts are only considered safe if they are owned by this wallet and newly created
           let { ownerPubkey, accountPubkey } = instruction.data;
           if (
             owner &&
@@ -123,7 +123,7 @@ export default function SignTransactionFormContent({
   autoApprove,
   buttonRef,
 }) {
-  const explorerUrlSuffix = useSolanaExplorerUrlSuffix();
+  const explorerUrlSuffix = useDomichainExplorerUrlSuffix();
   const connection = useConnection();
   const wallet = useWallet();
   const [publicKeys] = useWalletPublicKeys();
@@ -179,7 +179,7 @@ export default function SignTransactionFormContent({
   const onOpenAddress = (address) => {
     address &&
       window.open(
-        'https://solscan.io/account/' + address + explorerUrlSuffix,
+        'http://3.18.89.242:3000/account/' + address + explorerUrlSuffix,
         '_blank',
       );
   };

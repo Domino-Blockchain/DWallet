@@ -31,7 +31,7 @@ import { useAsyncData } from '../utils/fetch-loop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {
   TOKEN_PROGRAM_ID,
-  WRAPPED_SOL_MINT,
+  WRAPPED_DOMI_MINT,
 } from '../utils/tokens/instructions';
 import { parseTokenAccountData } from '../utils/tokens/data';
 import { Switch, Tooltip } from '@material-ui/core';
@@ -59,7 +59,7 @@ const DISABLED_ERC20_MINTS = new Set([
 
 export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
   const isProdNetwork = useIsProdNetwork();
-  const [tab, setTab] = useState('spl');
+  const [tab, setTab] = useState('dpl');
   const onSubmitRef = useRef();
 
   let [swapCoinInfo] = useSwapApiGet(
@@ -80,35 +80,35 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
   const { mint, tokenName, tokenSymbol } = balanceInfo;
 
   const getTabs = (mint) => {
-    // if sollet-private key not there, just show the SPL tab
-    if (!localStorage.getItem('sollet-private'))
+    // if domilet-private key not there, just show the DPL tab
+    if (!localStorage.getItem('domilet-private'))
       return [
-        <Tab label={`SPL ${swapCoinInfo.ticker}`} key="spl" value="spl" />,
+        <Tab label={`DPL ${swapCoinInfo.ticker}`} key="dpl" value="dpl" />,
         <Tab label={`Wormhole`} key="wormhole" value="wormhole" />,
       ];
 
     if (mint?.equals(WUSDC_MINT)) {
       return [
-        <Tab label="SPL WUSDC" key="spl" value="spl" />,
+        <Tab label="DPL WUSDC" key="dpl" value="dpl" />,
         <Tab label={`Wormhole`} key="wormhole" value="wormhole" />,
-        <Tab label="SPL USDC" key="wusdcToSplUsdc" value="wusdcToSplUsdc" />,
+        <Tab label="DPL USDC" key="wusdcToDplUsdc" value="wusdcToDplUsdc" />,
         <Tab label="ERC20 USDC" key="swap" value="swap" />,
       ];
     } else if (mint?.equals(WUSDT_MINT)) {
       return [
-        <Tab label="SPL WUSDT" key="spl" value="spl" />,
+        <Tab label="DPL WUSDT" key="dpl" value="dpl" />,
         <Tab label={`Wormhole`} key="wormhole" value="wormhole" />,
-        <Tab label="SPL USDT" key="wusdtToSplUsdt" value="wusdtToSplUsdt" />,
+        <Tab label="DPL USDT" key="wusdtToDplUsdt" value="wusdtToDplUsdt" />,
         <Tab label="ERC20 USDT" key="swap" value="swap" />,
       ];
     } else if (
-      localStorage.getItem('sollet-private') &&
+      localStorage.getItem('domilet-private') &&
       mint?.equals(USDC_MINT)
     ) {
       return [
-        <Tab label="SPL USDC" key="spl" value="spl" />,
+        <Tab label="DPL USDC" key="dpl" value="dpl" />,
         <Tab label={`Wormhole`} key="wormhole" value="wormhole" />,
-        <Tab label="SPL WUSDC" key="usdcToSplWUsdc" value="usdcToSplWUsdc" />,
+        <Tab label="DPL WUSDC" key="usdcToDplWUsdc" value="usdcToDplWUsdc" />,
         <Tab label="ERC20 USDC" key="swap" value="swap" />,
       ];
     } else {
@@ -122,12 +122,12 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
         />
       );
       const tabs = [
-        <Tab label={`SPL ${swapCoinInfo.ticker}`} key="spl" value="spl" />,
+        <Tab label={`DPL ${swapCoinInfo.ticker}`} key="dpl" value="dpl" />,
         <Tab label={`Wormhole`} key="wormhole" value="wormhole" />,
       ];
       if (
         !DISABLED_ERC20_MINTS.has(mint.toString()) ||
-        localStorage.getItem('sollet-private')
+        localStorage.getItem('domilet-private')
       ) {
         tabs.push(erc20Tab);
       }
@@ -172,12 +172,12 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
             textColor="primary"
             indicatorColor="primary"
           >
-            <Tab label="SPL" key="spl" value="spl" />
+            <Tab label="DPL" key="dpl" value="dpl" /> 
             <Tab label={`Wormhole`} key="wormhole" value="wormhole" />
           </Tabs>
         )}
-        {tab === 'spl' ? (
-          <SendSplDialog
+        {tab === 'dpl' ? (
+          <SendDplDialog
             onClose={onClose}
             publicKey={publicKey}
             balanceInfo={balanceInfo}
@@ -198,7 +198,7 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
               to bridge your assets.
             </DialogContentText>
           </DialogContent>
-        ) : tab === 'wusdcToSplUsdc' ? (
+        ) : tab === 'wusdcToDplUsdc' ? (
           <SendSwapDialog
             key={tab}
             onClose={onClose}
@@ -206,9 +206,9 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
             balanceInfo={balanceInfo}
             swapCoinInfo={swapCoinInfo}
             onSubmitRef={onSubmitRef}
-            wusdcToSplUsdc
+            wusdcToDplUsdc
           />
-        ) : tab === 'wusdtToSplUsdt' ? (
+        ) : tab === 'wusdtToDplUsdt' ? (
           <SendSwapDialog
             key={tab}
             onClose={onClose}
@@ -216,9 +216,9 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
             balanceInfo={balanceInfo}
             swapCoinInfo={swapCoinInfo}
             onSubmitRef={onSubmitRef}
-            wusdtToSplUsdt
+            wusdtToDplUsdt
           />
-        ) : tab === 'usdcToSplWUsdc' ? (
+        ) : tab === 'usdcToDplWUsdc' ? (
           <SendSwapDialog
             key={tab}
             onClose={onClose}
@@ -226,7 +226,7 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
             balanceInfo={balanceInfo}
             swapCoinInfo={swapCoinInfo}
             onSubmitRef={onSubmitRef}
-            usdcToSplWUsdc
+            usdcToDplWUsdc
           />
         ) : (
           <SendSwapDialog
@@ -248,11 +248,11 @@ export default function SendDialog({ open, onClose, publicKey, balanceInfo }) {
   );
 }
 
-function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
+function SendDplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
   const defaultAddressHelperText =
-    !balanceInfo.mint || balanceInfo.mint.equals(WRAPPED_SOL_MINT)
-      ? 'Enter Solana Address'
-      : 'Enter SPL token or Solana address';
+    !balanceInfo.mint || balanceInfo.mint.equals(WRAPPED_DOMI_MINT)
+      ? 'Enter Domichain Address'
+      : 'Enter DPL token or Domichain address';
   const wallet = useWallet();
   const [sendTransaction, sending] = useSendTransaction();
   const [addressHelperText, setAddressHelperText] = useState(
@@ -290,7 +290,7 @@ function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
         setIsDomainName(true);
         setDomainOwner(twitterOwner);
       }
-      if (destinationAddress.endsWith('.sol')) {
+      if (destinationAddress.endsWith('.domi')) {
         const name = destinationAddress.slice(0, -4);
         const hasSub = name.split('.').length === 2;
 
@@ -337,7 +337,7 @@ function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
           );
           if (accountInfo.mint.toBase58() === mintString) {
             setPassValidation(true);
-            setAddressHelperText('Address is a valid SPL token address');
+            setAddressHelperText('Address is a valid DPL token address');
           } else {
             setPassValidation(false);
             setAddressHelperText('Destination address mint does not match');
@@ -345,7 +345,7 @@ function SendSplDialog({ onClose, publicKey, balanceInfo, onSubmitRef }) {
         } else {
           setPassValidation(true);
           setAddressHelperText(
-            `Destination is a Solana address: ${
+            `Destination is a Domichain address: ${
               isDomainName ? domainOwner : destinationAddress
             }`,
           );
@@ -423,9 +423,9 @@ function SendSwapDialog({
   balanceInfo,
   swapCoinInfo,
   ethAccount,
-  wusdcToSplUsdc = false,
-  wusdtToSplUsdt = false,
-  usdcToSplWUsdc = false,
+  wusdcToDplUsdc = false,
+  wusdtToDplUsdt = false,
+  usdcToDplWUsdc = false,
   onSubmitRef,
 }) {
   const wallet = useWallet();
@@ -441,11 +441,12 @@ function SendSwapDialog({
 
   const { tokenName, decimals, mint } = balanceInfo;
   const blockchain =
-    wusdcToSplUsdc || wusdtToSplUsdt || usdcToSplWUsdc
-      ? 'sol'
-      : swapCoinInfo.blockchain === 'sol'
+    wusdcToDplUsdc || wusdtToDplUsdt || usdcToDplWUsdc
+      ? 'domi'
+      : swapCoinInfo.blockchain === 'domi'
       ? 'eth'
       : swapCoinInfo.blockchain;
+
   const needMetamask = blockchain === 'eth';
 
   const [ethBalance] = useAsyncData(
@@ -473,31 +474,31 @@ function SendSwapDialog({
     }
   }, [blockchain, ethAccount, setDestinationAddress]);
 
-  let splUsdcWalletAddress = useWalletAddressForMint(
-    wusdcToSplUsdc ? USDC_MINT : null,
+  let dplUsdcWalletAddress = useWalletAddressForMint(
+    wusdcToDplUsdc ? USDC_MINT : null,
   );
-  let splUsdtWalletAddress = useWalletAddressForMint(
-    wusdtToSplUsdt ? USDT_MINT : null,
+  let dplUsdtWalletAddress = useWalletAddressForMint(
+    wusdtToDplUsdt ? USDT_MINT : null,
   );
-  let splWUsdcWalletAddress = useWalletAddressForMint(
-    usdcToSplWUsdc ? WUSDC_MINT : null,
+  let dplWUsdcWalletAddress = useWalletAddressForMint(
+    usdcToDplWUsdc ? WUSDC_MINT : null,
   );
   useEffect(() => {
-    if (wusdcToSplUsdc && splUsdcWalletAddress) {
-      setDestinationAddress(splUsdcWalletAddress);
-    } else if (wusdtToSplUsdt && splUsdtWalletAddress) {
-      setDestinationAddress(splUsdtWalletAddress);
-    } else if (usdcToSplWUsdc && splWUsdcWalletAddress) {
-      setDestinationAddress(splWUsdcWalletAddress);
+    if (wusdcToDplUsdc && dplUsdcWalletAddress) {
+      setDestinationAddress(dplUsdcWalletAddress);
+    } else if (wusdtToDplUsdt && dplUsdtWalletAddress) {
+      setDestinationAddress(dplUsdtWalletAddress);
+    } else if (usdcToDplWUsdc && dplWUsdcWalletAddress) {
+      setDestinationAddress(dplWUsdcWalletAddress);
     }
   }, [
     setDestinationAddress,
-    wusdcToSplUsdc,
-    splUsdcWalletAddress,
-    wusdtToSplUsdt,
-    splUsdtWalletAddress,
-    usdcToSplWUsdc,
-    splWUsdcWalletAddress,
+    wusdcToDplUsdc,
+    dplUsdcWalletAddress,
+    wusdtToDplUsdt,
+    dplUsdtWalletAddress,
+    usdcToDplWUsdc,
+    dplWUsdcWalletAddress,
   ]);
 
   async function makeTransaction() {
@@ -510,15 +511,15 @@ function SendSwapDialog({
       address: destinationAddress,
       size: amount / 10 ** decimals,
     };
-    if (blockchain === 'sol') {
-      params.coin = swapCoinInfo.splMint;
+    if (blockchain === 'domi') {
+      params.coin = swapCoinInfo.dplMint;
     } else if (blockchain === 'eth') {
       params.coin = swapCoinInfo.erc20Contract;
     }
     if (mint?.equals(WUSDC_MINT)) {
       params.wusdcToUsdc = true;
     } else if (mint?.equals(USDC_MINT)) {
-      if (usdcToSplWUsdc) {
+      if (usdcToDplWUsdc) {
         params.usdcToWUsdc = true;
         params.coin = WUSDC_MINT.toString();
       }
@@ -526,7 +527,7 @@ function SendSwapDialog({
       params.wusdtToUsdt = true;
     }
     const swapInfo = await swapApiRequest('POST', 'swap_to', params);
-    if (swapInfo.blockchain !== 'sol') {
+    if (swapInfo.blockchain !== 'domi') {
       throw new Error('Unexpected blockchain');
     }
     return wallet.transferToken(
@@ -588,11 +589,11 @@ function SendSwapDialog({
     <>
       <DialogContent style={{ paddingTop: 16 }}>
         <DialogContentText>
-          SPL {tokenName} can be converted to{' '}
+          DPL {tokenName} can be converted to{' '}
           {blockchain === 'eth' && swapCoinInfo.erc20Contract
             ? 'ERC20'
-            : blockchain === 'sol' && swapCoinInfo.splMint
-            ? 'SPL'
+            : blockchain === 'domi' && swapCoinInfo.dplMint
+            ? 'DPL'
             : 'native'}{' '}
           {swapCoinInfo.ticker}
           {needMetamask ? ' via MetaMask' : null}.
@@ -618,7 +619,7 @@ function SendSwapDialog({
 
 function SendSwapProgress({ publicKey, signature, onClose, blockchain }) {
   const connection = useConnection();
-  const [swaps] = useSwapApiGet(`swaps_from/sol/${publicKey.toBase58()}`, {
+  const [swaps] = useSwapApiGet(`swaps_from/domi/${publicKey.toBase58()}`, {
     refreshInterval: 1000,
   });
   const [confirms] = useAsyncData(
@@ -788,7 +789,7 @@ function balanceAmountToUserAmount(balanceAmount, decimals) {
 }
 
 function EthWithdrawalCompleter({ ethAccount, publicKey }) {
-  const [swaps] = useSwapApiGet(`swaps_from/sol/${publicKey.toBase58()}`, {
+  const [swaps] = useSwapApiGet(`swaps_from/domi/${publicKey.toBase58()}`, {
     refreshInterval: 10000,
   });
   if (!swaps) {

@@ -43,7 +43,7 @@ import DepositDialog from './DepositDialog';
 import {
   useIsProdNetwork,
   refreshAccountInfo,
-  useSolanaExplorerUrlSuffix,
+  useDomichainExplorerUrlSuffix,
 } from '../utils/connection';
 import { useRegion } from '../utils/region';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -234,9 +234,9 @@ export default function BalancesList() {
                       selectedAccount &&
                       shortenAddress(selectedAccount.address.toBase58())
                     })`}{' '}
-                {allTokensLoaded && (
-                  <>({numberFormat.format(totalUsdValue.toFixed(2))})</>
-                )}
+                {/* {allTokensLoaded && ( */}
+                  {/* <>({numberFormat.format(totalUsdValue.toFixed(2))})</> */}
+                {/* )} */}
               </Typography>
             </Tooltip>
           </CopyToClipboard>
@@ -252,7 +252,7 @@ export default function BalancesList() {
                 </IconButton>
               </Tooltip>
             )}
-          <Tooltip title="Deposit via FTX Pay" arrow>
+          {/* <Tooltip title="Deposit via FTX Pay" arrow>
             <IconButton
               size={iconSize}
               onClick={() => setShowFtxPayDialog(true)}
@@ -312,7 +312,7 @@ export default function BalancesList() {
             >
               <SortIcon />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip title="Refresh" arrow>
             <IconButton
               size={iconSize}
@@ -576,7 +576,7 @@ function BalanceListItemDetails({
   balanceInfo,
   isAssociatedToken,
 }) {
-  const urlSuffix = useSolanaExplorerUrlSuffix();
+  const urlSuffix = useDomichainExplorerUrlSuffix();
   const classes = useStyles();
   const [sendDialogOpen, setSendDialogOpen] = useState(false);
   const [depositDialogOpen, setDepositDialogOpen] = useState(false);
@@ -597,7 +597,7 @@ function BalanceListItemDetails({
       'POST',
       'swap_to',
       {
-        blockchain: 'sol',
+        blockchain: 'domi',
         coin: balanceInfo.mint?.toBase58(),
         address: publicKey.toBase58(),
       },
@@ -617,9 +617,9 @@ function BalanceListItemDetails({
 
   let { mint, tokenName, tokenSymbol, owner, amount } = balanceInfo;
 
-  // Only show the export UI for the native SOL coin.
+  // Only show the export UI for the native DOMI coin.
   const exportNeedsDisplay =
-    mint === null && tokenName === 'SOL' && tokenSymbol === 'SOL';
+    mint === null && tokenName === 'DOMI' && tokenSymbol === 'DOMI';
 
   const market = tokenSymbol
     ? serumMarkets[tokenSymbol.toUpperCase()]
@@ -645,12 +645,12 @@ function BalanceListItemDetails({
           <Typography variant="body2">
             <Link
               href={
-                `https://solscan.io/account/${publicKey.toBase58()}` + urlSuffix
+                `http://3.18.89.242:3000/account/${publicKey.toBase58()}` + urlSuffix
               }
               target="_blank"
               rel="noopener"
             >
-              View on Solscan
+              View on Domiexplorer
             </Link>
           </Typography>
           {market && (

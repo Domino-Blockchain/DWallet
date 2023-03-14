@@ -11,7 +11,7 @@ import TokenIcon from '../TokenIcon';
 import Link from '@material-ui/core/Link';
 import { abbreviateAddress, useIsExtensionWidth } from '../../utils/utils';
 import FormControl from '@material-ui/core/FormControl';
-import { useSolanaExplorerUrlSuffix } from '../../utils/connection';
+import { useDomichainExplorerUrlSuffix } from '../../utils/connection';
 import { MenuItem, Select } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -41,16 +41,16 @@ export default function FtxPayDialog({ open, onClose }) {
   const classes = useStyles();
   const popularTokens = usePopularTokens();
   const selectedAccount = accounts.find((a) => a.isSelected);
-  const [coin, setCoin] = useState('SOL');
+  const [coin, setCoin] = useState('DOMI');
   const address = selectedAccount?.address?.toBase58();
-  const urlSuffix = useSolanaExplorerUrlSuffix();
+  const urlSuffix = useDomichainExplorerUrlSuffix();
   const isExtensionWidth = useIsExtensionWidth();
 
   const onSubmit = () => {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('address', address);
     urlSearchParams.append('coin', coin);
-    urlSearchParams.append('wallet', 'sol');
+    urlSearchParams.append('wallet', 'domi');
     urlSearchParams.append('memoIsRequired', false);
     window.open(
       `https://ftx.com/pay/request?${urlSearchParams}`,
@@ -69,7 +69,7 @@ export default function FtxPayDialog({ open, onClose }) {
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Send funds to your Sollet wallet from an FTX account, where you can add funds using crypto on multiple blockchains, credit cards, and more.
+          Send funds to your Domilet wallet from an FTX account, where you can add funds using crypto on multiple blockchains, credit cards, and more.
         </DialogContentText>
         <DialogContentText>
           If you don't have an FTX account, it may take a few moments to get up.
@@ -77,16 +77,16 @@ export default function FtxPayDialog({ open, onClose }) {
         <div className={classes.container}>
           <FormControl variant="outlined" className={classes.selector}>
             <Select value={coin} onChange={(e) => setCoin(e.target.value)}>
-              <MenuItem value={'SOL'}>
+              <MenuItem value={'DOMI'}>
                 <div className={classes.menuItem}>
                   <TokenIcon
                     url={null}
                     mint={null}
-                    tokenName={'SOL'}
+                    tokenName={'DOMI'}
                     size={30}
                     className={classes.tokenIcon}
                   />
-                  <div>{isExtensionWidth ? 'SOL' : 'Solana SOL'}</div>
+                  <div>{isExtensionWidth ? 'DOMI' : 'Domichain DOMI'}</div>
                 </div>
               </MenuItem>
               {popularTokens
@@ -104,7 +104,7 @@ export default function FtxPayDialog({ open, onClose }) {
                         target="_blank"
                         rel="noopener"
                         href={
-                          `https://solscan.io/account/${tokenInfo.address}` +
+                          `http://3.18.89.242:3000/account/${tokenInfo.address}` +
                           urlSuffix
                         }
                       >

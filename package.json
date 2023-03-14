@@ -1,7 +1,13 @@
 {
-  "name": "spl-token-wallet",
-  "version": "0.1.0",
-  "private": true,
+  "name": "domichain_wallet",
+  "homepage": "./",
+  "displayName": "Domichain Wallet",
+  "version": "0.0.1",
+  "description": "Domichain's official wallet.",
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "license": "Apache-2.0",
   "dependencies": {
     "@bonfida/spl-name-service": "^0.1.24",
     "@ledgerhq/hw-transport-webhid": "^5.51.1",
@@ -85,16 +91,19 @@
     "singleQuote": true,
     "trailingComma": "all"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "git-format-staged -f 'prettier --stdin-filepath \"{}\"' src/*.js"
-    }
-  },
   "devDependencies": {
     "@types/react-copy-to-clipboard": "^5.0.1",
+    "cordova-android": "^10.1.2",
+    "cordova-browser": "^6.0.0",
     "gh-pages": "^3.1.0",
     "git-format-staged": "^2.1.0",
     "husky": "^4.3.6",
     "prettier": "^2.2.1"
+  },
+  "cordova": {
+    "platforms": [
+      "android",
+      "browser"
+    ]
   }
 }

@@ -16,10 +16,10 @@ const ConnectionContext = React.createContext<{
   connection: Connection;
 } | null>(null);
 
-export const MAINNET_URL = 'https://solana-api.projectserum.com';
+export const MAINNET_URL = 'https://mainnet.domichain.io';
 // No backup url for now. Leave the variable to not break wallets that
 // have saved the url in their local storage, previously.
-export const MAINNET_BACKUP_URL = 'https://solana-api.projectserum.com/';
+export const MAINNET_BACKUP_URL = 'https://mainnet.domichain.io';
 export function ConnectionProvider({ children }) {
   const [endpoint, setEndpoint] = useLocalStorageState(
     'connectionEndpoint',
@@ -61,15 +61,15 @@ export function useIsProdNetwork() {
   return context.endpoint === MAINNET_URL || context.endpoint === MAINNET_BACKUP_URL;
 }
 
-export function useSolanaExplorerUrlSuffix() {
+export function useDomichainExplorerUrlSuffix() {
   const context = useContext(ConnectionContext);
   if (!context) {
     throw new Error('Missing connection context');
   }
   const endpoint = context.endpoint;
-  if (endpoint === clusterApiUrl('devnet')) {
+  if (endpoint === 'https://api.devnet.domichain.io') {
     return '?cluster=devnet';
-  } else if (endpoint === clusterApiUrl('testnet')) {
+  } else if (endpoint === 'https://api.testnet.domichain.io') {
     return '?cluster=testnet';
   }
   return '';

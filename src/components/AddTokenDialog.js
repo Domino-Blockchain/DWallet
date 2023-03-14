@@ -24,7 +24,7 @@ import { abbreviateAddress } from '../utils/utils';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
-import { useSolanaExplorerUrlSuffix } from '../utils/connection';
+import { useDomichainExplorerUrlSuffix } from '../utils/connection';
 import Link from '@material-ui/core/Link';
 import CopyableDisplay from './CopyableDisplay';
 import DialogForm from './DialogForm';
@@ -90,10 +90,10 @@ export default function AddTokenDialog({ open, onClose }) {
   }) {
     if (erc20Address) {
       let tokenInfo = await swapApiRequest('POST', `coins/eth/${erc20Address}`);
-      mintAddress = tokenInfo.splMint;
+      mintAddress = tokenInfo.dplMint;
       tokenName = tokenInfo.name;
       tokenSymbol = tokenInfo.ticker;
-      if (tokenInfo.blockchain !== 'sol') {
+      if (tokenInfo.blockchain !== 'domi') {
         tokenName = 'Wrapped ' + tokenName;
       }
     }
@@ -116,7 +116,7 @@ export default function AddTokenDialog({ open, onClose }) {
         {tokenAccountCost ? (
           <DialogContentText>
             Add a token to your wallet. This will cost{' '}
-            {feeFormat.format(tokenAccountCost / LAMPORTS_PER_SOL)} SOL.
+            {feeFormat.format(tokenAccountCost / LAMPORTS_PER_SOL)} DOMI.
           </DialogContentText>
         ) : (
           <LoadingIndicator />
@@ -223,7 +223,7 @@ export default function AddTokenDialog({ open, onClose }) {
 
 function TokenListItem({ tokenInfo, onSubmit, disabled, existingAccount }) {
   const [open, setOpen] = useState(false);
-  const urlSuffix = useSolanaExplorerUrlSuffix();
+  const urlSuffix = useDomichainExplorerUrlSuffix();
   const alreadyExists = !!existingAccount;
 
   return (
@@ -243,7 +243,7 @@ function TokenListItem({ tokenInfo, onSubmit, disabled, existingAccount }) {
                 target="_blank"
                 rel="noopener"
                 href={
-                  `https://solscan.io/account/${tokenInfo.address}` +
+                  `http://3.18.89.242:3000/account/${tokenInfo.address}` +
                   urlSuffix
                 }
               >

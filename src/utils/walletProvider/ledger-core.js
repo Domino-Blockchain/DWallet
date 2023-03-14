@@ -18,7 +18,7 @@ const LEDGER_CLA = 0xe0;
 /*
  * Helper for chunked send of large payloads
  */
-async function solana_send(transport, instruction, p1, payload) {
+async function domichain_send(transport, instruction, p1, payload) {
   var p2 = 0;
   var payload_offset = 0;
 
@@ -41,7 +41,7 @@ async function solana_send(transport, instruction, p1, payload) {
       );
       if (reply.length !== 2) {
         throw new Error(
-          'solana_send: Received unexpected reply payload',
+          'domichain_send: Received unexpected reply payload',
           'UnexpectedReplyPayload',
         );
       }
@@ -61,7 +61,7 @@ function _harden(n) {
   return (n | BIP32_HARDENED_BIT) >>> 0;
 }
 
-export function solana_derivation_path(account, change, derivationPath) {
+export function domichain_derivation_path(account, change, derivationPath) {
   let useAccount = account ? account : 0;
   let useChange = change ? change : 0;
   derivationPath = derivationPath
@@ -74,7 +74,7 @@ export function solana_derivation_path(account, change, derivationPath) {
     let offset = 0;
     offset = derivation_path.writeUInt8(length, offset);
     offset = derivation_path.writeUInt32BE(_harden(44), offset); // Using BIP44
-    derivation_path.writeUInt32BE(_harden(501), offset); // Solana's BIP44 path
+    derivation_path.writeUInt32BE(_harden(501), offset); // Domichain's BIP44 path
     return derivation_path;
   } else if (derivationPath === DERIVATION_PATH.bip44) {
     const length = 3;
@@ -82,7 +82,7 @@ export function solana_derivation_path(account, change, derivationPath) {
     let offset = 0;
     offset = derivation_path.writeUInt8(length, offset);
     offset = derivation_path.writeUInt32BE(_harden(44), offset); // Using BIP44
-    offset = derivation_path.writeUInt32BE(_harden(501), offset); // Solana's BIP44 path
+    offset = derivation_path.writeUInt32BE(_harden(501), offset); // Domichain's BIP44 path
     derivation_path.writeUInt32BE(_harden(useAccount), offset);
     return derivation_path;
   } else if (derivationPath === DERIVATION_PATH.bip44Change) {
@@ -91,7 +91,7 @@ export function solana_derivation_path(account, change, derivationPath) {
     let offset = 0;
     offset = derivation_path.writeUInt8(length, offset);
     offset = derivation_path.writeUInt32BE(_harden(44), offset); // Using BIP44
-    offset = derivation_path.writeUInt32BE(_harden(501), offset); // Solana's BIP44 path
+    offset = derivation_path.writeUInt32BE(_harden(501), offset); // Domichain's BIP44 path
     offset = derivation_path.writeUInt32BE(_harden(useAccount), offset);
     derivation_path.writeUInt32BE(_harden(useChange), offset);
     return derivation_path;
@@ -100,8 +100,8 @@ export function solana_derivation_path(account, change, derivationPath) {
   }
 }
 
-async function solana_ledger_get_pubkey(transport, derivation_path) {
-  return solana_send(
+async function domichain_ledger_get_pubkey(transport, derivation_path) {
+  return domichain_send(
     transport,
     INS_GET_PUBKEY,
     P1_NON_CONFIRM,
@@ -109,16 +109,16 @@ async function solana_ledger_get_pubkey(transport, derivation_path) {
   );
 }
 
-export async function solana_ledger_sign_transaction(
+export async function domichain_ledger_sign_transaction(
   transport,
   derivation_path,
   transaction,
 ) {
   const msg_bytes = transaction.serializeMessage();
-  return solana_ledger_sign_bytes(transport, derivation_path, msg_bytes);
+  return domichain_ledger_sign_bytes(transport, derivation_path, msg_bytes);
 }
 
-export async function solana_ledger_sign_bytes(
+export async function domichain_ledger_sign_bytes(
   transport,
   derivation_path,
   msg_bytes,
@@ -127,7 +127,7 @@ export async function solana_ledger_sign_bytes(
   num_paths.writeUInt8(1);
   const payload = Buffer.concat([num_paths, derivation_path, msg_bytes]);
 
-  return solana_send(transport, INS_SIGN_MESSAGE, P1_CONFIRM, payload);
+  return domichain_send(transport, INS_SIGN_MESSAGE, P1_CONFIRM, payload);
 }
 
 export async function getPublicKey(transport, path) {
@@ -135,9 +135,9 @@ export async function getPublicKey(transport, path) {
   if (path) {
     from_derivation_path = path;
   } else {
-    from_derivation_path = solana_derivation_path();
+    from_derivation_path = domichain_derivation_path();
   }
-  const from_pubkey_bytes = await solana_ledger_get_pubkey(
+  const from_pubkey_bytes = await domichain_ledger_get_pubkey(
     transport,
     from_derivation_path,
   );
@@ -146,11 +146,11 @@ export async function getPublicKey(transport, path) {
   return new PublicKey(from_pubkey_string);
 }
 
-export async function solana_ledger_confirm_public_key(
+export async function domichain_ledger_confirm_public_key(
   transport,
   derivation_path,
 ) {
-  return await solana_send(
+  return await domichain_send(
     transport,
     INS_GET_PUBKEY,
     P1_CONFIRM,

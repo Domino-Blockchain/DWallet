@@ -90,7 +90,7 @@ function PageContents() {
   if (!wallet) {
     return (
       <>
-        {!ignoreSuggestion && (
+        {!ignoreSuggestion && false && (
           <WalletSuggestionDialog
             open={showWalletSuggestion}
             onClose={() => setShowWalletSuggestion(false)}
@@ -131,7 +131,7 @@ function WalletSuggestionDialog({ open, onClose, onIgnore }) {
       <DialogTitle>Looking for a Wallet?</DialogTitle>
       <DialogContent>
         <Typography>
-          For the best Solana experience, it is recommended to use{' '}
+          For the best Domichain experience, it is recommended to use{' '}
           <b>Backpack</b>
         </Typography>
         <List disablePadding style={{ marginTop: '16px' }}>

@@ -27,7 +27,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import GavelIcon from '@material-ui/icons/Gavel';
 import { signAndSendTransaction } from '../utils/tokens';
 import { useSnackbar } from 'notistack';
-import { SOL_TLD_AUTHORITY } from '../utils/name-service';
+import { DOMI_TLD_AUTHORITY } from '../utils/name-service';
 import { transferNameOwnership } from '@bonfida/spl-name-service';
 import { useConnection } from '../utils/connection';
 import { useWallet } from '../utils/wallet';
@@ -121,7 +121,7 @@ const TransferDialog = ({
         domainName,
         newOwnerPubkey,
         undefined,
-        SOL_TLD_AUTHORITY,
+        DOMI_TLD_AUTHORITY,
       );
       await signAndSendTransaction(
         connection,
@@ -254,7 +254,7 @@ const DomainListItem = ({
           <DnsIcon />
         </ListItemIcon>
         <ListItemText
-          primary={`${domainName}.sol`}
+          primary={`${domainName}.domi`}
           secondary={domainKey.toBase58()}
           secondaryTypographyProps={{ className: classes.address }}
         />

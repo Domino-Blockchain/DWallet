@@ -23,7 +23,7 @@ export async function swapApiRequest(
     params.body = JSON.stringify(body);
   }
 
-  let resp = await fetch(`https://swap.sollet.io/api/${path}`, params);
+  let resp = await fetch(`https://swap.domilet.io/api/${path}`, params);
   return await handleSwapApiResponse(resp, ignoreUserErrors);
 }
 
