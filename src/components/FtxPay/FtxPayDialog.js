@@ -11,7 +11,7 @@ import TokenIcon from '../TokenIcon';
 import Link from '@material-ui/core/Link';
 import { abbreviateAddress, useIsExtensionWidth } from '../../utils/utils';
 import FormControl from '@material-ui/core/FormControl';
-import { useSolanaExplorerUrlSuffix } from '../../utils/connection';
+import { useDomichainExplorerUrlSuffix } from '../../utils/connection';
 import { MenuItem, Select } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -41,16 +41,16 @@ export default function FtxPayDialog({ open, onClose }) {
   const classes = useStyles();
   const popularTokens = usePopularTokens();
   const selectedAccount = accounts.find((a) => a.isSelected);
-  const [coin, setCoin] = useState('DOMI');
+  const [coin, setCoin] = useState('dpl');
   const address = selectedAccount?.address?.toBase58();
-  const urlSuffix = useSolanaExplorerUrlSuffix();
+  const urlSuffix = useDomichainExplorerUrlSuffix();
   const isExtensionWidth = useIsExtensionWidth();
 
   const onSubmit = () => {
     const urlSearchParams = new URLSearchParams();
     urlSearchParams.append('address', address);
     urlSearchParams.append('coin', coin);
-    urlSearchParams.append('wallet', 'sol');
+    urlSearchParams.append('wallet', 'domi');
     urlSearchParams.append('memoIsRequired', false);
     window.open(
       `https://ftx.com/pay/request?${urlSearchParams}`,

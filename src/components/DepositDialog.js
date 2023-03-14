@@ -4,7 +4,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogForm from './DialogForm';
 import { abbreviateAddress } from '../utils/utils';
 import CopyableDisplay from './CopyableDisplay';
-import { useSolanaExplorerUrlSuffix } from '../utils/connection';
+import { useDomichainExplorerUrlSuffix } from '../utils/connection';
 import Typography from '@material-ui/core/Typography';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
@@ -43,7 +43,7 @@ export default function DepositDialog({
   isAssociatedToken,
 }) {
   const ethAccount = useEthAccount();
-  const urlSuffix = useSolanaExplorerUrlSuffix();
+  const urlSuffix = useDomichainExplorerUrlSuffix();
   const { mint, tokenName, tokenSymbol, owner } = balanceInfo;
   const [tab, setTab] = useState(0);
 
@@ -58,13 +58,13 @@ export default function DepositDialog({
 
   let tabs = null;
   if (swapInfo) {
-    let firstTab = `DOMI ${tokenSymbol ?? swapInfo.coin.ticker}`;
+    let firstTab = `DPL ${tokenSymbol ?? swapInfo.coin.ticker}`;
     let secondTab = swapInfo.coin.ticker;
     if (!mint) {
       firstTab = 'DOMI';
     } else {
       if (
-        localStorage.getItem('sollet-private') ||
+        localStorage.getItem('domilet-private') ||
         swapInfo.blockchain !== 'eth'
       ) {
         secondTab = `${
@@ -84,13 +84,13 @@ export default function DepositDialog({
       >
         <Tab label={firstTab} />
         {(!DISABLED_MINTS.has(mint && mint.toString()) ||
-          localStorage.getItem('sollet-private')) &&
+          localStorage.getItem('domilet-private')) &&
           secondTab && <Tab label={secondTab} />}
       </Tabs>
     );
   }
-  const displaySolAddress = publicKey.equals(owner) || isAssociatedToken;
-  const depositAddressStr = displaySolAddress
+  const displayDomiAddress = publicKey.equals(owner) || isAssociatedToken;
+  const depositAddressStr = displayDomiAddress
     ? owner.toBase58()
     : publicKey.toBase58();
   return (
@@ -114,7 +114,7 @@ export default function DepositDialog({
           textColor="primary"
           indicatorColor="primary"
         >
-          <Tab label={mint ? 'DOMI' : 'DOMI'} />
+          <Tab label={mint ? 'DPL' : 'DPL'} />
           <Tab label="Wormhole" />
         </Tabs>
       ) : (
@@ -123,7 +123,7 @@ export default function DepositDialog({
       <DialogContent style={{ paddingTop: 16 }}>
         {tab === 0 ? (
           <>
-            {!displaySolAddress && isAssociatedToken === false ? (
+            {!displayDomiAddress && isAssociatedToken === false ? (
               <DialogContentText>
                 This address can only be used to receive{' '}
                 {tokenSymbol ?? abbreviateAddress(mint)}. Do not send DOMI to
@@ -172,7 +172,7 @@ export default function DepositDialog({
             to bridge your assets.
           </DialogContentText>
         ) : (
-          <SolletSwapDepositAddress
+          <DomichainSwapDepositAddress
             balanceInfo={balanceInfo}
             swapInfo={swapInfo}
             ethAccount={ethAccount}
@@ -186,7 +186,7 @@ export default function DepositDialog({
   );
 }
 
-function SolletSwapDepositAddress({ balanceInfo, swapInfo, ethAccount }) {
+function DomichainSwapDepositAddress({ balanceInfo, swapInfo, ethAccount }) {
   const [ethBalance] = useAsyncData(
     () => getErc20Balance(ethAccount),
     'ethBalance',
@@ -228,7 +228,7 @@ function SolletSwapDepositAddress({ balanceInfo, swapInfo, ethAccount }) {
     return (
       <>
         <DialogContentText>
-          Native BTC can be converted to DOMI {tokenName} by sending it to the
+          Native BTC can be converted to DPL {tokenName} by sending it to the
           following address:
         </DialogContentText>
         <CopyableDisplay
@@ -241,12 +241,12 @@ function SolletSwapDepositAddress({ balanceInfo, swapInfo, ethAccount }) {
     );
   }
 
-  if (localStorage.getItem('sollet-private') && blockchain === 'eth') {
+  if (localStorage.getItem('domilet-private') && blockchain === 'eth') {
     return (
       <>
         <DialogContentText>
           {coin.erc20Contract ? 'ERC20' : 'Native'} {coin.ticker} can be
-          converted to {mint ? 'DOMI' : 'native'} {tokenName} via MetaMask. To
+          converted to {mint ? 'DPL' : 'native'} {tokenName} via MetaMask. To
           convert, you must already have DOMI in your wallet.
         </DialogContentText>
         <DialogContentText>

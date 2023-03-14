@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import React from 'react';
-import { useSolanaExplorerUrlSuffix } from '../utils/connection';
+import { useDomichainExplorerUrlSuffix } from '../utils/connection';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogForm from './DialogForm';
@@ -28,7 +28,7 @@ export default function TokenInfoDialog({
   balanceInfo,
 }) {
   let { mint, tokenName, tokenSymbol } = balanceInfo;
-  const urlSuffix = useSolanaExplorerUrlSuffix();
+  const urlSuffix = useDomichainExplorerUrlSuffix();
   const classes = useStyles();
 
   return (

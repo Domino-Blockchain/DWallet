@@ -79,11 +79,11 @@ export class Wallet {
     });
   };
 
-  createAssociatedTokenAccount = async (splTokenMintAddress) => {
+  createAssociatedTokenAccount = async (dplTokenMintAddress) => {
     return await createAssociatedTokenAccount({
       connection: this.connection,
       wallet: this,
-      splTokenMintAddress,
+      dplTokenMintAddress,
     });
   };
 

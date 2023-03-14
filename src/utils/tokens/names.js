@@ -18,7 +18,7 @@ import { TokenListProvider } from '@solana/spl-token-registry';
 // @solana/spl-token-registry. To add an icon or token name to the wallet,
 // add the mints to that package. To add a token to the `AddTokenDialog`,
 // add the `mintAddress` here. The rest of the fields are not used.
-const POPULAR_TOKENS = {
+const POPULAR_TOKENS = { //modify to our own
   [MAINNET_URL]: [
     {
       mintAddress: 'SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt',

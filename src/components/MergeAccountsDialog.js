@@ -179,7 +179,7 @@ export default function MergeAccountsDialog({ open, onClose }) {
             <DialogContentText>
               Migrating sends all tokens to{' '}
               <Link
-                href={'https://spl.solana.com/associated-token-account'}
+                href={'https://spl.solana.com/associated-token-account'} //fixme
                 target="_blank"
                 rel="noopener"
               >
@@ -276,7 +276,7 @@ async function mergeMint(
     const [address] = await createAssociatedTokenAccount({
       connection,
       wallet,
-      splTokenMintAddress: mintAccountSet[0].account.mint,
+      dplTokenMintAddress: mintAccountSet[0].account.mint,
     });
 
     return address;

@@ -61,7 +61,7 @@ export function useIsProdNetwork() {
   return context.endpoint === MAINNET_URL || context.endpoint === MAINNET_BACKUP_URL;
 }
 
-export function useSolanaExplorerUrlSuffix() {
+export function useDomichainExplorerUrlSuffix() {
   const context = useContext(ConnectionContext);
   if (!context) {
     throw new Error('Missing connection context');

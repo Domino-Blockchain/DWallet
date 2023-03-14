@@ -7,7 +7,7 @@ import {
   getFilteredProgramAccounts,
   NAME_PROGRAM_ID,
   getDNSRecordAddress,
-} from '@bonfida/spl-name-service';
+} from '@bonfida/spl-name-service'; //fixme
 import { useConnection } from '../connection';
 import { useWallet } from '../wallet';
 import BN from 'bn.js';
@@ -15,7 +15,7 @@ import { useAsyncData } from '../fetch-loop';
 import tuple from 'immutable-tuple';
 
 // Address of the DOMI TLD
-export const SOL_TLD_AUTHORITY = new PublicKey(
+export const DOMI_TLD_AUTHORITY = new PublicKey(
   '58PwtjSDuFHuUkYjH9BYnnQKHfwo9reZhC2zMJv9JPkx',
 );
 
@@ -36,7 +36,7 @@ export const resolveTwitterHandle = async (
   }
 };
 
-export const getNameKey = async (name: string, parent = SOL_TLD_AUTHORITY) => {
+export const getNameKey = async (name: string, parent = DOMI_TLD_AUTHORITY) => {
   const hashedDomainName = await getHashedName(name);
   const key = await getNameAccountKey(hashedDomainName, undefined, parent);
   return key;

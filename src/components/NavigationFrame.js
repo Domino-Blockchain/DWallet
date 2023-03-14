@@ -90,7 +90,7 @@ export default function NavigationFrame({ children }) {
             }}
           >
             {/* <Typography>
-              Beware of sites attempting to impersonate sollet.io or other DeFi
+              Beware of sites attempting to impersonate domilet.io or other DeFi
               services.
             </Typography> */}
           </div>

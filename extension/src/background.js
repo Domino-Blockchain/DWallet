@@ -53,7 +53,7 @@ function handleDisconnect(message, sender, sendResponse) {
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.channel === 'sollet_contentscript_background_channel') {
+  if (message.channel === 'domilet_contentscript_background_channel') {
     if (message.data.method === 'connect') {
       handleConnect(message, sender, sendResponse);
     } else if (message.data.method === 'disconnect') {
@@ -63,11 +63,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     // keeps response channel open
     return true;
-  } else if (message.channel === 'sollet_extension_background_channel') {
+  } else if (message.channel === 'domilet_extension_background_channel') {
     const responseHandler = responseHandlers.get(message.data.id);
     responseHandlers.delete(message.data.id);
     responseHandler(message.data);
-  } else if (message.channel === 'sollet_extension_mnemonic_channel') {
+  } else if (message.channel === 'domilet_extension_mnemonic_channel') {
     if (message.method === 'set') {
       unlockedMnemonic = message.data;
     } else if (message.method === 'get') {

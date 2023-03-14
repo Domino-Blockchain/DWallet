@@ -43,7 +43,7 @@ import DepositDialog from './DepositDialog';
 import {
   useIsProdNetwork,
   refreshAccountInfo,
-  useSolanaExplorerUrlSuffix,
+  useDomichainExplorerUrlSuffix,
 } from '../utils/connection';
 import { useRegion } from '../utils/region';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -576,7 +576,7 @@ function BalanceListItemDetails({
   balanceInfo,
   isAssociatedToken,
 }) {
-  const urlSuffix = useSolanaExplorerUrlSuffix();
+  const urlSuffix = useDomichainExplorerUrlSuffix();
   const classes = useStyles();
   const [sendDialogOpen, setSendDialogOpen] = useState(false);
   const [depositDialogOpen, setDepositDialogOpen] = useState(false);

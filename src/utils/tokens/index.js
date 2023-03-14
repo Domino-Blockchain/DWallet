@@ -171,12 +171,12 @@ export async function createAndInitializeTokenAccount({
 export async function createAssociatedTokenAccount({
   connection,
   wallet,
-  splTokenMintAddress,
+  dplTokenMintAddress,
 }) {
   const [ix, address] = await createAssociatedTokenAccountIx(
     wallet.publicKey,
     wallet.publicKey,
-    splTokenMintAddress,
+    dplTokenMintAddress,
   );
   const tx = new Transaction();
   tx.add(ix);
@@ -188,11 +188,11 @@ export async function createAssociatedTokenAccount({
 async function createAssociatedTokenAccountIx(
   fundingAddress,
   walletAddress,
-  splTokenMintAddress,
+  dplTokenMintAddress,
 ) {
   const associatedTokenAddress = await findAssociatedTokenAddress(
     walletAddress,
-    splTokenMintAddress,
+    dplTokenMintAddress,
   );
   const systemProgramId = new PublicKey('11111111111111111111111111111111');
   const keys = [
@@ -212,7 +212,7 @@ async function createAssociatedTokenAccountIx(
       isWritable: false,
     },
     {
-      pubkey: splTokenMintAddress,
+      pubkey: dplTokenMintAddress,
       isSigner: false,
       isWritable: false,
     },

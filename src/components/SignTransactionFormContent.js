@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import { decodeMessage } from '../utils/transactions';
-import { useConnection, useSolanaExplorerUrlSuffix } from '../utils/connection';
+import { useConnection, useDomichainExplorerUrlSuffix } from '../utils/connection';
 import { useWallet, useWalletPublicKeys } from '../utils/wallet';
 import NewOrder from './instructions/NewOrder';
 import UnknownInstruction from './instructions/UnknownInstruction';
@@ -123,7 +123,7 @@ export default function SignTransactionFormContent({
   autoApprove,
   buttonRef,
 }) {
-  const explorerUrlSuffix = useSolanaExplorerUrlSuffix();
+  const explorerUrlSuffix = useDomichainExplorerUrlSuffix();
   const connection = useConnection();
   const wallet = useWallet();
   const [publicKeys] = useWalletPublicKeys();
