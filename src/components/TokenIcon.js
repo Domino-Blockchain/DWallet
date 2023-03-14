@@ -4,7 +4,7 @@ export default function TokenIcon({ mint, url, tokenName, size = 20, ...props })
   const [hasError, setHasError] = useState(false);
 
   if (!url && mint === null) {
-    url = 'https://i.imgur.com/oqp8Cbo.png';
+    url = 'https://i.imgur.com/odptY2p.png';
   }
 
   if (hasError || !url) {

@@ -119,17 +119,17 @@ function NavigationButtons() {
   let elements = [];
   if (page === 'wallet') {
     elements = [
-      isExtension && <ConnectionsButton />,
-      <WalletSelector />,
-      <NetworkSelector />,
-    ];
+    isExtension && <ConnectionsButton />,
+    <WalletSelector />,
+    <NetworkSelector />,
+ ];
   } else if (page === 'connections') {
     elements = [<WalletButton />];
   }
 
-  if (isExtension && isExtensionWidth) {
-    elements.push(<ExpandButton />);
-  }
+  // if (isExtension && isExtensionWidth) {
+  elements.push(<ExpandButton />);
+  // }
 
   return elements;
 }

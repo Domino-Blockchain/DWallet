@@ -315,7 +315,7 @@ function LoginForm() {
           onChange={setPasswordOnChange}
           onKeyDown={submitOnEnter}
         />
-        <FormControlLabel
+        {false && <FormControlLabel
           control={
             <Checkbox
               checked={stayLoggedIn}
@@ -323,7 +323,7 @@ function LoginForm() {
             />
           }
           label="Keep wallet unlocked"
-        />
+        />}
       </CardContent>
       <CardActions style={{ justifyContent: 'flex-end' }}>
         <Button color="primary" onClick={submit}>
